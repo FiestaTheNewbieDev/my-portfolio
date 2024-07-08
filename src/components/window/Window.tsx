@@ -45,6 +45,8 @@ export default function Window(props: IProps) {
 		<Rnd
 			position={{ x: coords.x, y: coords.y }}
 			size={{ width: size.width, height: size.height }}
+			minWidth={320}
+			minHeight={128}
 			onDragStop={(e, d) => {
 				setCoords({ x: d.x, y: d.y });
 			}}
@@ -58,34 +60,29 @@ export default function Window(props: IProps) {
 			bounds="parent"
 			cancel=".disable-dragging"
 		>
-			<div className="h-full">
-				<div
-					className="flex justify-between px-2"
-					style={{ backgroundColor: osSettings.theme.primary }}
-				>
-					<div className="flex items-center justify-start gap-2">
-						<Image
-							src={props.icon}
-							alt={props.title}
-							width={24}
-							height={24}
+			<div
+				className="flex h-12 items-center justify-between"
+				style={{ backgroundColor: osSettings.theme.primary }}
+			>
+				<div className="ml-2 flex justify-start gap-2">
+					<Image
+						src={props.icon}
+						alt={props.title}
+						width={24}
+						height={24}
+					/>
+					<span className="text-white">{props.title}</span>
+				</div>
+				<div className="disable-dragging h-full">
+					<button className="h-full px-4" onClick={handleMinimize}>
+						<FontAwesomeIcon
+							icon={faMinus}
+							className="text-white"
 						/>
-						<span className="ml-2 text-white">{props.title}</span>
-					</div>
-					<div className="disable-dragging">
-						<button className="p-2" onClick={handleMinimize}>
-							<FontAwesomeIcon
-								icon={faMinus}
-								className="text-white"
-							/>
-						</button>
-						<button className="p-2" onClick={handleClose}>
-							<FontAwesomeIcon
-								icon={faX}
-								className="text-white"
-							/>
-						</button>
-					</div>
+					</button>
+					<button className="h-full px-4" onClick={handleClose}>
+						<FontAwesomeIcon icon={faX} className="text-white" />
+					</button>
 				</div>
 			</div>
 		</Rnd>
